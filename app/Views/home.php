@@ -43,7 +43,7 @@
         </div>
 
     </div>
-
+    <p style="text-align: center; font-size: 24px; color: #000; font-weight: 700; margin-top: 3rem">Total de parties: <?= count($_SESSION['parties'] ?? []) ?></p>
 </div>
 
 

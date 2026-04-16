@@ -42,6 +42,10 @@ class Router {
                 break;
             
             case 'listarParty':
+                if (!isset($_SESSION['user'])) {
+                header("Location: ?action=login");
+                exit;
+            }
                 $controller = new \App\Controllers\PartyController();
                 $controller->viewListarParty();
                 break;
