@@ -28,14 +28,14 @@ class PartyController {
 
                 foreach ($_SESSION['parties'] as $p) {
                     if (in_array($_SESSION['user'], $p['membros'])) {
-                        $_SESSION['error'] = "Você já está em uma party!";
+                        $_SESSION['error'] = "Você já está em uma party.";
                         header("Location: ?action=listarParty");
                         exit;
                     }
                 }
 
                 if (count($party['membros']) >= $party['max']) {
-                    $_SESSION['error'] = "Party cheia!";
+                    $_SESSION['error'] = "Party cheia.";
                     header("Location: ?action=listarParty");
                     exit;
                 }
@@ -67,6 +67,37 @@ class PartyController {
         exit;
     }
 
+    public function excluirParty() {
+
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            header("Location: ?action=listarParty");
+        }
+
+        foreach ($_SESSION['parties'] as $index => $party) {
+
+            if ($party['id'] == $id) {
+
+                if ($party['criador'] !== $_SESSION['user']) {
+                    $_SESSION['error'] = "Você não tem permissão para excluir essa party!";
+                    header("Location: ?action=listarParty");
+                }
+
+                unset($_SESSION['parties'][$index]);
+
+                $_SESSION['parties'] = array_values($_SESSION['parties']);
+
+                $_SESSION['success'] = "Party excluída com sucesso.";
+                header("Location: ?action=listarParty");
+            }
+        }
+
+      
+        $_SESSION['error'] = "Party não encontrada.";
+        header("Location: ?action=listarParty");
+    }
+
     public function armazenarParty() {
 
         $nome = $_POST['nome'] ?? '';
@@ -74,7 +105,7 @@ class PartyController {
         $max = $_POST['max'] ?? '';
 
         if (empty($nome) || empty($jogo) || empty($max)) {
-            $_SESSION['error'] = "Preencha todos os campos!";
+            $_SESSION['error'] = "Preencha todos os campos.";
             header("Location: ?action=criarParty");
             exit;
         }
@@ -96,5 +127,16 @@ class PartyController {
 
         header("Location: ?action=listarParty");
         exit;
+    }
+
+  public function usuarioParty() {
+
+        foreach ($_SESSION['parties'] ?? [] as $party) {
+            if (in_array($_SESSION['user'], $party['membros'])) {
+                return $party;
+            }
+        }
+
+        return null;
     }
 }

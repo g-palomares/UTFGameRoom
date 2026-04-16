@@ -15,6 +15,7 @@
 <?php endif; ?>
 
 <form method="POST" action="?action=efetuarRegistro">
+    <input type="text" name="username" placeholder="username"><br><br>
     <input type="email" name="email" placeholder="Email"><br><br>
     <input type="password" name="senha" placeholder="Senha"><br><br>
     <input type="password" name="confirmarSenha" placeholder="Confirmar Senha"><br><br>

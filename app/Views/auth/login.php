@@ -7,6 +7,8 @@
 
 <h1>Login</h1>
 
+
+
 <form method="POST" action="?action=efetuarLogin">
     <input type="email" name="email" placeholder="Email"><br><br>
     <input type="password" name="senha" placeholder="Senha"><br><br>

@@ -29,7 +29,7 @@ class AuthController {
 
         foreach ($_SESSION['users'] as $user) {
             if ($user['email'] === $email && password_verify($senha, $user['senha'])) {
-                $_SESSION['user'] = $email;
+                $_SESSION['user'] = $user['username'];
 
                 header("Location: ?action=home");
                 exit;
@@ -40,14 +40,19 @@ class AuthController {
         header("Location: ?action=login");
         exit;
     }
-
+    
     public function criarConta() {
 
+        if (!isset($_SESSION['users'])) {
+            $_SESSION['users'] = [];
+            }
+
+        $username = $_POST['username'] ?? '';
         $email = $_POST['email'] ?? '';
         $senha = $_POST['senha'] ?? '';
         $confirmar = $_POST['confirmarSenha'] ?? '';
 
-        if (empty($email) || empty($senha) || empty($confirmar)) {
+        if (empty($username) || empty($email) || empty($senha) || empty($confirmar)) {
             $_SESSION['error'] = "Preencha todos os campos.";
             header("Location: ?action=criarConta");
             exit;
@@ -59,19 +64,24 @@ class AuthController {
             exit;
         }
 
-        if (!isset($_SESSION['users'])) {
-            $_SESSION['users'] = [];
-        }
-
-        foreach ($_SESSION['users'] as $user) {
-            if ($user['email'] === $email) {
-                $_SESSION['error'] = "Email já cadastrado.";
-                header("Location: ?action=criarConta");
-                exit;
+        
+        if ($user['username'] === $username) {
+            $_SESSION['error'] = "Username já em uso.";
+            header("Location: ?action=criarConta");
+            exit;
             }
-        }
+            
+            
+            foreach ($_SESSION['users'] as $user) {
+                if ($user['email'] === $email) {
+                    $_SESSION['error'] = "Email já cadastrado.";
+                    header("Location: ?action=criarConta");
+                    exit;
+                }
+            }
 
         $_SESSION['users'][] = [
+            'username' => $username,
             'email' => $email,
             'senha' => password_hash($senha, PASSWORD_DEFAULT)
         ];
@@ -84,9 +94,10 @@ class AuthController {
 
 
     public function logout() {
-        session_destroy();
 
-        header("Location: ?action=criarConta");
-        exit;
-    }
+    unset($_SESSION['user']);
+
+    header("Location: ?action=criarConta");
+    exit;
+}
 }

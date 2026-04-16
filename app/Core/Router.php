@@ -65,7 +65,15 @@ class Router {
                 $controller = new \App\Controllers\PartyController();
                 $controller->sairParty();
                 break;  
-
+            case 'excluirParty':
+                $controller = new \App\Controllers\PartyController();
+                $controller->excluirParty();
+                break;
+            
+            case 'perfil':
+                $controller = new \App\Controllers\UsuarioController();
+                $controller->perfilUsuario();
+                break;
             default:
                 echo "erro 404 - Página não encontrada";
                 break;    
