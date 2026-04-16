@@ -7,7 +7,24 @@
     <br>
     <br>
     
+    <form class="form-style filtro" method="GET" >
+        <div class="input-container">
+
+            <input type="hidden" name="action" value="listarParty">
+            
+            <input class="input-field" type="text" name="busca" placeholder="Buscar por nome ou jogo"
+            value="<?= $_GET['busca'] ?? '' ?>">
+            
+        </div>
+        <button class="button" type="submit">Buscar</button>
+    </form>
     <div class="container">
+
+
+        <?php if (empty($parties)): ?>
+            <p>Nenhuma party encontrada.</p>
+        <?php endif; ?>
+
         <?php foreach ($parties as $party): ?>
             
             <?php

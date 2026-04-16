@@ -17,6 +17,7 @@
                     <input class="input-field" type="password" name="senha" placeholder="Digite a senha" required>
                 </div>
                 <button class="button" type="submit">Entrar</button>
+                <a style="align-self: center" href="?action=listarParty">Voltar ao lobby de parties</a>
             </form>
         </div>
     </div>

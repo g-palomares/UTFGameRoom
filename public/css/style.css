@@ -471,3 +471,30 @@ button:hover::before {
     opacity: 0.8;
     cursor: not-allowed;
 }
+
+.filtro {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.filtro input {
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: #334155;
+    color: white;
+}
+
+.filtro button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+}
+
+.filtro button:hover {
+    background: #2563eb;
+}

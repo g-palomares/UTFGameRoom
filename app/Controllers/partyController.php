@@ -4,10 +4,21 @@ namespace App\Controllers;
 
 class PartyController {
 
-    public function viewListarParty() {
-        $parties = $_SESSION['parties'] ?? [];
-        require __DIR__ . '/../views/party/listarParty.php';
+public function viewListarParty() {
+
+    $parties = $_SESSION['parties'] ?? [];
+
+    $busca = $_GET['busca'] ?? '';
+
+    if (!empty($busca)) {
+        $parties = array_filter($parties, function($party) use ($busca) {
+            return stripos($party['nome'], $busca) !== false
+                || stripos($party['jogo'], $busca) !== false;
+        });
     }
+
+    require __DIR__ . '/../views/party/listarParty.php';
+}
 
     public function viewCriarParty() {
         require __DIR__ . '/../views/party/criarParty.php';
