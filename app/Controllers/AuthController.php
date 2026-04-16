@@ -36,7 +36,7 @@ class AuthController {
             }
         }
 
-        $_SESSION['error'] = "Login inválido!";
+        $_SESSION['error'] = "Login inválido";
         header("Location: ?action=login");
         exit;
     }
