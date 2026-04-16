@@ -1,3 +1,6 @@
+
+<?php require __DIR__ . '/../layout/header.php'; ?>
+
 <?php if ($minhaParty): ?>
 
     <h3>Sua Party</h3>
@@ -11,3 +14,5 @@
     <p>Você não está em nenhuma party.</p>
 
 <?php endif; ?>
+
+<?php require __DIR__ . '/../layout/footer.php'; ?>

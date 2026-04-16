@@ -86,7 +86,7 @@ class AuthController {
             'senha' => password_hash($senha, PASSWORD_DEFAULT)
         ];
 
-        $_SESSION['success'] = "Cadastro realizado com sucesso!";
+        $_SESSION['success'] = "Cadastro realizado com sucesso.";
 
         header("Location: ?action=login");
         exit;

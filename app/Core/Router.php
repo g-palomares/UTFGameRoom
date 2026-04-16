@@ -69,7 +69,16 @@ class Router {
                 $controller = new \App\Controllers\PartyController();
                 $controller->excluirParty();
                 break;
-            
+            case 'editarParty':
+                $controller = new \App\Controllers\PartyController();
+                $controller->viewEditarParty();
+                break;
+            case 'atualizarParty':
+                $controller = new \App\Controllers\PartyController();
+                $controller->atualizarParty();
+                break;
+
+
             case 'perfil':
                 $controller = new \App\Controllers\UsuarioController();
                 $controller->perfilUsuario();
